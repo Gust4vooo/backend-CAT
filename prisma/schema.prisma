@@ -149,11 +149,15 @@ enum TransactionStatus {
 model Transaction {
   id             String            @id @default(cuid())
   testId         String
-  paymentMethod  String
-  paymentTime    DateTime          @default(now())
-  total          Int
-  status         TransactionStatus
+  userId         String
+  paymentMethod  String?
+  paymentTime    DateTime?        @default(now())
+  total          Int?
+  paymentId      String?
+  paymentStatus  PaymentStatus
+  vaNumber       String?
   test           Test              @relation(fields: [testId], references: [id])
+  user           User              @relation(fields: [userId], references: [id])
 }
 
 
@@ -183,4 +187,25 @@ enum Category {
   UTBK
   Pemrograman
   Psikotes
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+}
+
+model Withdrawal {
+  id            String           @id @default(cuid())
+  authorId      String
+  amount        Int
+  bankCode      String      
+  accountNumber String     
+  accountName   String         
+  reference     String?         
+  notes         String?        
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  author        Author          @relation(fields: [authorId], references: [id])
 }

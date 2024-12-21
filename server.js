@@ -14,6 +14,8 @@ import authRoutes from './src/routes/authRoutes.js';
 import dashboardRoutes from './src/routes/dashboardRoutes.js';
 import detailSoal from './src/routes/detailsoalRoutes.js';
 import timerRoutes from './src/routes/timerRoutes.js';
+import payoutRoutes from './src/routes/payoutRoutes.js';
+import paymentRoutes from './src/routes/paymentRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -47,6 +49,8 @@ app.use("/auth", authRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use('/tes', detailSoal);
 app.use('/timer', timerRoutes);
+app.use('/withdrawals', payoutRoutes);
+app.use('/payment', paymentRoutes);
 
 // Mulai server
 const PORT = process.env.PORT || 2000;
